@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boîte Cadeau Magique - WebAR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    
+    <!-- AR.js pour WebAR -->
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
+    
+    <style>
+      body { margin: 0; overflow: hidden; }
+    </style>
+  </head>
+
+  <body>
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+      vr-mode-ui="enabled: false"
+    >
+      <!-- Caméra AR -->
+      <a-entity camera></a-entity>
+
+      <!-- Sol -->
+      <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#ffffff"></a-plane>
+
+      <!-- Boîte cadeau -->
+      <a-entity id="gift-box"
+                position="0 0 -2"
+                gltf-model="assets/giftbox.glb"
+                scale="0.5 0.5 0.5"
+                animation__open="property: rotation; to: 0 180 0; dur: 1500; startEvents: click">
+      </a-entity>
+
+      <!-- Surprise -->
+      <a-entity id="surprise"
+                position="0 0.5 -2"
+                visible="false"
+                gltf-model="assets/surprise.glb"
+                scale="0.3 0.3 0.3">
+      </a-entity>
+
+      <!-- Assets -->
+      <a-assets>
+        <a-asset-item id="boxModel" src="assets/giftbox.glb"></a-asset-item>
+        <a-asset-item id="surpriseModel" src="assets/surprise.glb"></a-asset-item>
+      </a-assets>
+    </a-scene>
+
+    <script>
+      const box = document.querySelector('#gift-box');
+      const surprise = document.querySelector('#surprise');
+
+      box.addEventListener('click', () => {
+        box.emit('click');
+        setTimeout(() => {
+          surprise.setAttribute('visible', true);
+        }, 1500);
+      });
+    </script>
+  </body>
+</html>
