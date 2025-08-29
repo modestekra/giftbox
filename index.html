@@ -50,11 +50,15 @@
     renderer="logarithmicDepthBuffer: true; colorManagement: true;"
     loading-screen="enabled: false">
 
-    <!-- Chargement des modèles externes -->
-    <!-- Marqueur -->
-    <a-marker preset="hiro" id="marker">
+   
 
-      <a-assets>
+    <!-- Marqueur -->
+    <a-marker preset="hiro" id="marker" src="assets/pattern-marker.patt"></a-marker>>
+
+      
+
+       <!-- Chargement des modèles externes -->
+    <a-assets>
       <!-- Boîte cadeau GLB (externe, à remplacer par ton lien ou asset local) -->
       <a-asset-item id="boxModel" src="assets/giftbox.glb"></a-asset-item>
       <!-- Surprise GLB (ex: chat, jouet, personnage) -->
@@ -136,4 +140,3 @@
   </script>
 </body>
 </html>
-
