@@ -36,7 +36,7 @@
   <div id="ui-overlay">
     <div id="instructions">
       <h2>🎁 GiftBox AR</h2>
-      <p>Pointez votre caméra vers le marqueur "Hiro" et tapez sur la boîte cadeau pour découvrir la surprise !</p>
+      <p>Pointez votre caméra vers le marqueur personnalisé et tapez sur la boîte cadeau pour découvrir la surprise !</p>
       <button id="start-button">Commencer l'expérience</button>
     </div>
   </div>
@@ -50,20 +50,16 @@
     renderer="logarithmicDepthBuffer: true; colorManagement: true;"
     loading-screen="enabled: false">
 
-   
-
-    <!-- Marqueur -->
-    <a-marker preset="hiro" id="marker" src="assets/pattern-marker.patt"></a-marker>>
-
-      
-
-       <!-- Chargement des modèles externes -->
+    <!-- Chargement des modèles externes -->
     <a-assets>
-      <!-- Boîte cadeau GLB (externe, à remplacer par ton lien ou asset local) -->
+      <!-- Boîte cadeau GLB -->
       <a-asset-item id="boxModel" src="assets/giftbox.glb"></a-asset-item>
       <!-- Surprise GLB (ex: chat, jouet, personnage) -->
       <a-asset-item id="surpriseModel" src="assets/surprise.glb"></a-asset-item>
     </a-assets>
+
+    <!-- Marqueur personnalisé -->
+    <a-marker type="pattern" url="assets/pattern-marker.patt" id="marker">
 
       <!-- Boîte cadeau -->
       <a-entity id="giftbox-container" position="0 0 0" scale="0.5 0.5 0.5">
@@ -91,6 +87,7 @@
               color="#ff6b6b"
               visible="false">
       </a-text>
+
     </a-marker>
 
     <!-- Camera -->
@@ -105,18 +102,18 @@
       document.getElementById('tap-hint').style.display = 'block';
     });
 
-    // Quand on clique sur la boîte
+    // Interaction : quand on clique sur la boîte
     document.querySelector('#giftbox-body').addEventListener('click', () => {
       if (isOpened) return;
       isOpened = true;
 
       document.getElementById('tap-hint').style.display = 'none';
 
-      // Animation ouverture (scale out + apparition surprise)
       const box = document.querySelector('#giftbox-body');
       const surprise = document.querySelector('#surprise-animal');
       const text = document.querySelector('#congratulations-text');
 
+      // Disparition de la boîte
       box.setAttribute('animation', {
         property: 'scale',
         to: '0 0 0',
@@ -124,6 +121,7 @@
         easing: 'easeInOutQuad'
       });
 
+      // Apparition de la surprise + texte
       setTimeout(() => {
         surprise.setAttribute('visible', true);
         surprise.setAttribute('animation', {
@@ -133,7 +131,6 @@
           dur: 800,
           easing: 'easeOutBounce'
         });
-
         text.setAttribute('visible', true);
       }, 900);
     });
