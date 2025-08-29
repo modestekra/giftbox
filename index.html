@@ -51,15 +51,16 @@
     loading-screen="enabled: false">
 
     <!-- Chargement des modèles externes -->
+  
+
+    <!-- Marqueur personnalisé -->
+    <a-marker type="pattern" url="assets/pattern-marker.patt" id="marker">
     <a-assets>
       <!-- Boîte cadeau GLB -->
       <a-asset-item id="boxModel" src="assets/giftbox.glb"></a-asset-item>
       <!-- Surprise GLB (ex: chat, jouet, personnage) -->
       <a-asset-item id="surpriseModel" src="assets/surprise.glb"></a-asset-item>
     </a-assets>
-
-    <!-- Marqueur personnalisé -->
-    <a-marker type="pattern" url="assets/pattern-marker.patt" id="marker">
 
       <!-- Boîte cadeau -->
       <a-entity id="giftbox-container" position="0 0 0" scale="0.5 0.5 0.5">
@@ -137,3 +138,4 @@
   </script>
 </body>
 </html>
+
